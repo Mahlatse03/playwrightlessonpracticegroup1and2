@@ -25,14 +25,12 @@ export class BasePage {
     // }
 
     async basePageClickElement(locator: Locator) {
-        await locator.scrollIntoViewIfNeeded();
         await locator.click();
     }
 
 
     async basePageEnterText(locator: Locator, text: string) {
         console.log(`Entering text: "${text}" into element: ${locator}`);
-        await locator.scrollIntoViewIfNeeded();
         await locator.fill(text);
     }
 

@@ -4,15 +4,11 @@ import {expect, Locator, Page} from "@playwright/test";
 export class LoginPage extends BasePage {
   async openNdosiPage() {
         await this.basePageGoToUrl('/');
+    
     }
 
     async userLogin(username: string, password: string) {
         // Fill username and password fields using helper from BasePage:
-        await this.basePageEnterText(this.page.getByLabel('Username'), username); // playwright selector
-        await this.basePageEnterText(this.page.getByLabel('Password'), password); // CSS selector
-        await this.basePageClickElement(this.page.locator('xpath=//button[contains(., "Login")]'));
-        // 
-         
         await this.basePageEnterText(this.page.locator('#login-email'), username);
         await this.basePageEnterText(this.page.locator('#login-password'), password);
         await this.basePageClickElement(this.page.locator('xpath=//button[contains(., "Login")]'));
