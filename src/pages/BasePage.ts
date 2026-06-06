@@ -36,6 +36,7 @@ export class BasePage {
 
     async basePageVerifyElementVisible(locator: Locator) {
         console.log(`Verifying element is visible: ${locator}`);
-        await expect(locator).toBeVisible();
+        await expect(locator).toBeVisible({ timeout: 4000});
+        
     }
 }

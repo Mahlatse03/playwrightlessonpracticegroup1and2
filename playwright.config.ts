@@ -25,7 +25,7 @@ export default defineConfig({
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-    baseURL: 'https://ndosisimplifiedautomation.vercel.app/#practice',
+    baseURL: 'https://ndosisimplifiedautomation.vercel.app',
     actionTimeout: 0,
     navigationTimeout: 30000,
     screenshot: 'only-on-failure',
