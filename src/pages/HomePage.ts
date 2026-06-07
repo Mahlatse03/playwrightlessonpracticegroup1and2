@@ -14,4 +14,10 @@ export class HomePage extends BasePage {
         await this.basePageVerifyElementVisible(this.verifyHomePage);
     }
 
+    async navigateToInstructorPage() {
+        await this.basePageClickElement(this.page.locator('xpath=//button//span[text()="Menu"]'));
+        //await this.basePageClickElement(this.page.locator('xpath=//button[text()="Instructor Panel"]')); //returns error because there are 2 items
+        await this.basePageClickElement(this.page.locator('xpath=//button[text()="Instructor Panel"]').first()); //using first() to click the first matching element
+    }
+
 }

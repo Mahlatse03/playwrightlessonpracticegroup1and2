@@ -25,6 +25,13 @@ export default defineConfig({
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
+    // 1. Tell Playwright not to override the browser's natural size
+    viewport: null,
+    
+    launchOptions: {
+      // 2. Pass the maximize argument to the browser binary
+      args: ['--start-maximized'],
+    },
     baseURL: 'https://ndosisimplifiedautomation.vercel.app',
     actionTimeout: 0,
     navigationTimeout: 30000,
