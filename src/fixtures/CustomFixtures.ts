@@ -5,6 +5,9 @@ import { InstructorPage } from '../pages/InstructorPage';
 // import { AdminPage } from '../pages/adminPage';
 // import { StudentPage } from '../pages/studentPage';
 
+
+//Explain fixture concept - check notes
+
 type CustomFixtures = { 
     loginPage: LoginPage;
     homePage: HomePage;

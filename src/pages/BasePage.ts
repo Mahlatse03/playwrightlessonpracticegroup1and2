@@ -1,7 +1,10 @@
 import { Page, Locator, expect } from '@playwright/test';
 
 export class BasePage {
+    // Base page export: Making the “blueprint” available to the rest of your project, 
+    // because Typescript files are private by default.
     // BasePage stores Playwright `Page` instance. Class is protected, so only extending classes can access it.
+    //Check notes to explain the Base classconcept
     protected readonly page: Page; // to interact with browser
 
     constructor(page: Page) {

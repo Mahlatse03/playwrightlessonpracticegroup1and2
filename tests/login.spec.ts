@@ -29,7 +29,8 @@ test.describe('Login Functionality', () => {
         //interact with alert using Promise.all
     
         //a race condition occurs when two things happen almost simultaneously, 
-        // and the test fails if they happen in the wrong order. Promise.all is Playwright's primary weapon against race conditions.
+        // and the test fails if they happen in the wrong order. 
+        // Promise.all is Playwright's primary weapon against race conditions.
     
         await Promise.all([
             // This listener waits for the dialog event to fire

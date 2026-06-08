@@ -16,6 +16,7 @@ export class HomePage extends BasePage {
 
     async navigateToInstructorPage() {
         await this.basePageClickElement(this.page.locator('xpath=//button//span[text()="Menu"]'));
+        await this.page.waitForTimeout(1000); // Add a short wait to ensure the menu is fully expanded before clicking the next button
         //await this.basePageClickElement(this.page.locator('xpath=//button[text()="Instructor Panel"]')); //returns error because there are 2 items
         await this.basePageClickElement(this.page.locator('xpath=//button[text()="Instructor Panel"]').first()); //using first() to click the first matching element
     }
