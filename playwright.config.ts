@@ -43,11 +43,7 @@ export default defineConfig({
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'],
-        launchOptions: {
-          args: ['--start-maximized'], //Pass the maximize argument to the browser binary
-        },
-      },
+      use: { ...devices['Desktop Chrome'] },
     },
 
     // {

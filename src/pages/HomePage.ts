@@ -27,10 +27,8 @@ export class HomePage extends BasePage {
      async navigateToUserProfilePage() {
         await this.basePageClickElement(this.page.locator('xpath=//button//span[text()="Menu"]'));
         await this.page.waitForTimeout(1000); // Add a short wait to ensure the menu is fully expanded before clicking the next button
-       //await this.basePageClickElement(this.page.locator('xpath=//button[contains(., "My Profile")]').first());
         await this.basePageClickElement(this.page.getByText('My Profile')); //using getByText to click the My Profile button, which is more resistant to UI structure changes and accessibility-focused
-        //await this.basePageClickElement(this.page.getByRole('button', { name: /Instructor Panel/i })); //recommended
-        //resistant to UI structure changes and accessibility-focused
+     
     }
 
 }
