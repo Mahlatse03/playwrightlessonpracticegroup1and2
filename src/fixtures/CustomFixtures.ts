@@ -2,8 +2,8 @@ import { test as base } from '@playwright/test';
 import { LoginPage } from '../pages/LoginPage';
 import { HomePage } from '../pages/HomePage';
 import { InstructorPage } from '../pages/InstructorPage';
-// import { AdminPage } from '../pages/adminPage';
-// import { StudentPage } from '../pages/studentPage';
+import { UserProfilePage } from '../pages/UserProfilePage';
+
 
 
 //Explain fixture concept - check notes
@@ -12,8 +12,7 @@ type CustomFixtures = {
     loginPage: LoginPage;
     homePage: HomePage;
     instructorPage: InstructorPage;
-    // adminPage: AdminPage;
-    // studentPage: StudentPage;
+    userProfilePage: UserProfilePage;
 };
 
 // --> base.extend
@@ -38,15 +37,11 @@ export const test = base.extend<CustomFixtures>({ //create instances of pages
 
    instructorPage: async ({ page }, use) => {
         await use(new InstructorPage(page));
+    },
+
+   userProfilePage: async ({ page }, use) => {
+        await use(new UserProfilePage(page));
     }
-
-    // adminPage: async ({ page }, use) => {
-    //     await use(new AdminPage(page));
-    // },
-
-    // studentPage: async ({ page }, use) => {
-    //     await use(new StudentPage(page));
-    // }
 });
 
 export { expect } from '@playwright/test';

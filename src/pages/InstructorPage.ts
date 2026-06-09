@@ -13,7 +13,7 @@ export class InstructorPage extends BasePage {
     }
 
      async navigateToMytimetable() {
-        await this.basePageClickElement(this.page.locator('xpath=//button[contains(., "MyTimetable")]')); 
+        await this.basePageClickElement(this.page.locator('xpath=//button[contains(., "My Timetable")]')); 
         
     }
 

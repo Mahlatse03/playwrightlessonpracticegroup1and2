@@ -42,4 +42,13 @@ export class BasePage {
         await expect(locator).toBeVisible({ timeout: 4000});
         
     }
+
+    async basePageNavigateToHomePage(){
+       // await this.page.goto('/');
+    }
+
+    async basePageGetElementText(locator: Locator): Promise<string> {
+        console.log(`Getting text from element: ${locator}`);
+        return await locator.textContent() || ''; //return empty string if textContent is null
+    }
 }
