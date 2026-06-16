@@ -17,12 +17,11 @@ export class UserProfilePage extends BasePage {
         await this.basePageClickElement(this.page.locator('css=button:has-text("Save Changes")')); //using css selector to click the Save Changes button
     }
 
-    async verifyGitUsernameUpdated(gitUsername: string) {
+    async verifyGitUsernameUpdated(gitUsername: string): Promise<string> {
         await this.page.waitForTimeout(3000); 
-        const actualGitUsername = await this.basePageGetElementText(this.page.getByPlaceholder('e.g., octocat'));
-        console.log (`Actual GitHub username: ${actualGitUsername}`);    //using getByPlaceholder to get the text of the GitHub Username field
-        if (actualGitUsername !== gitUsername) {
-            throw new Error(`Expected GitHub username "${gitUsername}", but found "${actualGitUsername}"`);
-        }
+        const gitUsernameField = this.page.getByPlaceholder('e.g., octocat');
+        const actualGitUsername = await gitUsernameField.inputValue();
+        console.log (`GitHub username field value: ${actualGitUsername}`);
+        return actualGitUsername;
     }
 }

@@ -31,6 +31,13 @@ export class LoginPage extends BasePage {
         //Debugging (Troubleshooting Failures)
     }
 
+    //combine all methods to call one full login method in the test
+    async performFullLogin(username: string, password: string) {
+        await this.basePageGoToUrl('/');
+        await this.navigateToLoginPage();
+        await this.userLogin(username, password);
+    }
+
     async clickLoginButton() {
         await this.basePageClickElement(this.page.locator('xpath=//button[contains(., "Login")]')); //using xpath
     }

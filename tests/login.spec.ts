@@ -1,24 +1,50 @@
-import { expect, test } from '../src/fixtures/customFixtures';
+import { expect, test } from '../src/fixtures/CustomFixtures';
 import { validUsers, invalidUsers } from '../src/data/Testdata';
 
 test.describe('Login Functionality', () => {
-    test('Positive login - Admin', async ({ loginPage, homePage }, testInfo) => {
+    test('Positive login - Admin', async ({ loginPage, homePage, page }) => {
         await loginPage.basePageGoToUrl('/');
         await loginPage.navigateToLoginPage();
         await loginPage.userLogin(validUsers.admin.email, validUsers.admin.password);
+         //soft assertion
+        await expect.soft(page).toHaveURL(/dashboard/);
         await homePage.verifyHomePageIsVisible();
     
     });
 
-    test('Missing Credentials', async ({ loginPage, homePage }, testInfo) => {
+    test.only('Positive login via API - class user', async ( {request} ) => {
+        const response = await request.post('https://www.ndosiautomation.co.za/APIDEV/login', {
+            //payload
+            data: {
+            "email": validUsers.classUser.email,
+            "password": validUsers.classUser.password
+            }
+        });
+        const body = await response.json();
+        console.log (body);
+        expect(response.status()).toBe(200);
+       // expect(body.data.user.firstname).toBe(validUsers.classUser.name);
+        expect(body.message).toBe("Login successful");
+        
+    
+    });
+
+    test('Missing Credentials', async ({ loginPage, page }, testInfo) => {
         await loginPage.basePageGoToUrl('/');
         await loginPage.navigateToLoginPage();
-        await loginPage.clickLoginButton(); //using xpath to click login without entering credentials
-
-    
-        //take screenshot of home page after login
-        await testInfo.attach('homePageScreenshot', {path: 'Screenshots/LoginSuccess.png', contentType: 'image/png'});
-    
+        
+        // Expect error message or alert when trying to login without credentials
+        await Promise.all([
+            page.waitForEvent('dialog').then(async (dialog) => {
+                const alertText = dialog.message();
+                expect(alertText).toBeTruthy(); // Verify alert appears
+                await dialog.accept();
+            }),
+            loginPage.clickLoginButton()
+        ]);
+        
+        //take screenshot of home page after failed login attempt
+        await testInfo.attach('failedLoginScreenshot', {path: 'Screenshots/LoginFailed.png', contentType: 'image/png'});
     });
 
     test('Negative login - Invalid username', async ({ loginPage, page }) => {

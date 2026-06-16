@@ -27,7 +27,7 @@ export class BasePage {
     //     await locator.click();
     // }
 
-    async basePageClickElement(locator: Locator) {
+    async basePageClickElement(locator: Locator) { //variable name and type
         await locator.click();
     }
 
@@ -47,7 +47,8 @@ export class BasePage {
        // await this.page.goto('/');
     }
 
-    async basePageGetElementText(locator: Locator): Promise<string> {
+    async basePageGetElementText(locator: Locator): Promise<string> { 
+        //promise<string> because textContent is async and returns a promise that resolves to a string
         console.log(`Getting text from element: ${locator}`);
         return await locator.textContent() || ''; //return empty string if textContent is null
     }
