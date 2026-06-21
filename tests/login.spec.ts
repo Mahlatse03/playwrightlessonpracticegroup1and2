@@ -2,7 +2,7 @@ import { expect, test } from '../src/fixtures/CustomFixtures';
 import { validUsers, invalidUsers } from '../src/data/Testdata';
 
 test.describe('Login Functionality', () => {
-    test('Positive login - Admin', async ({ loginPage, homePage, page }) => {
+    test.only('Positive login - Admin', async ({ loginPage, homePage, page }) => {
         await loginPage.basePageGoToUrl('/');
         await loginPage.navigateToLoginPage();
         await loginPage.userLogin(validUsers.admin.email, validUsers.admin.password);
@@ -12,7 +12,7 @@ test.describe('Login Functionality', () => {
     
     });
 
-    test.only('Positive login via API - class user', async ( {request} ) => {
+    test('Positive login via API - class user', async ( {request} ) => {
         const response = await request.post('https://www.ndosiautomation.co.za/APIDEV/login', {
             //payload
             data: {
@@ -47,7 +47,7 @@ test.describe('Login Functionality', () => {
         await testInfo.attach('failedLoginScreenshot', {path: 'Screenshots/LoginFailed.png', contentType: 'image/png'});
     });
 
-    test('Negative login - Invalid username', async ({ loginPage, page }) => {
+    test.only('Negative login - Invalid username', async ({ loginPage, page }) => {
         await loginPage.basePageGoToUrl('/');
         await loginPage.navigateToLoginPage();
         await loginPage.userLogin(invalidUsers.invalidUserOne.email, invalidUsers.invalidUserOne.password);
@@ -65,9 +65,8 @@ test.describe('Login Functionality', () => {
             expect(alertText).toContain('Invalid credentials');
             await dialog.accept();
             }),
-
-            // This triggers the alert
-            page.getByRole('button', { name: 'Login' }).click()
+            // This triggers the alert, remove this line
+            //page.getByRole('button', { name: 'Login' }).click()
         ]);
     });
 });
