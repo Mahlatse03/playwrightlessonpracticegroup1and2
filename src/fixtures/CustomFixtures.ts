@@ -4,7 +4,7 @@ import { HomePage } from '../pages/HomePage';
 import { InstructorPage } from '../pages/InstructorPage';
 import { UserProfilePage } from '../pages/UserProfilePage';
 
-//Explain fixture concept - check notes
+//Explain fixture concept - check notes (fixture = Global variable)
 //create instances of pages
 type CustomFixtures = { 
     loginPage: LoginPage;
