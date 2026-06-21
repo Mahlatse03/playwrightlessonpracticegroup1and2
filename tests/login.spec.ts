@@ -2,7 +2,7 @@ import { expect, test } from '../src/fixtures/CustomFixtures';
 import { validUsers, invalidUsers } from '../src/data/Testdata';
 
 test.describe('Login Functionality', () => {
-    test.only('Positive login - Admin', async ({ loginPage, homePage, page }) => {
+    test('Positive login - Admin', async ({ loginPage, homePage, page }) => {
         await loginPage.basePageGoToUrl('/');
         await loginPage.navigateToLoginPage();
         await loginPage.userLogin(validUsers.admin.email, validUsers.admin.password);
@@ -12,7 +12,8 @@ test.describe('Login Functionality', () => {
     
     });
 
-    test('Positive login via API - class user', async ( {request} ) => {
+    test('Positive login via API - class user', async ( {request} ) => { //built in playwright fixture request, not using page
+       //save response in a variable
         const response = await request.post('https://www.ndosiautomation.co.za/APIDEV/login', {
             //payload
             data: {
@@ -29,25 +30,26 @@ test.describe('Login Functionality', () => {
     
     });
 
-    test('Missing Credentials', async ({ loginPage, page }, testInfo) => {
-        await loginPage.basePageGoToUrl('/');
-        await loginPage.navigateToLoginPage();
+    // test('Missing Credentials', async ({ loginPage, page }, testInfo) => {
+    //     await loginPage.basePageGoToUrl('/');
+    //     await loginPage.navigateToLoginPage();
+    //     await loginPage.userLogin("", "");
         
-        // Expect error message or alert when trying to login without credentials
-        await Promise.all([
-            page.waitForEvent('dialog').then(async (dialog) => {
-                const alertText = dialog.message();
-                expect(alertText).toBeTruthy(); // Verify alert appears
-                await dialog.accept();
-            }),
-            loginPage.clickLoginButton()
-        ]);
+    //     // Expect error message or alert when trying to login without credentials
+    //     await Promise.all([
+    //         page.waitForEvent('dialog').then(async (dialog) => {
+    //             const alertText = dialog.message();
+    //             expect(alertText).toBeTruthy(); // Verify alert appears
+    //             await dialog.accept();
+    //         }),
+    //         loginPage.clickLoginButton()
+    //     ]);
         
-        //take screenshot of home page after failed login attempt
-        await testInfo.attach('failedLoginScreenshot', {path: 'Screenshots/LoginFailed.png', contentType: 'image/png'});
-    });
+    //     //take screenshot of home page after failed login attempt
+    //    // await testInfo.attach('failedLoginScreenshot', {path: 'Screenshots/LoginFailed.png', contentType: 'image/png'});
+    // });
 
-    test.only('Negative login - Invalid username', async ({ loginPage, page }) => {
+    test('Negative login - Invalid username', async ({ loginPage, page }) => {
         await loginPage.basePageGoToUrl('/');
         await loginPage.navigateToLoginPage();
         await loginPage.userLogin(invalidUsers.invalidUserOne.email, invalidUsers.invalidUserOne.password);
@@ -65,7 +67,7 @@ test.describe('Login Functionality', () => {
             expect(alertText).toContain('Invalid credentials');
             await dialog.accept();
             }),
-            // This triggers the alert, remove this line
+            // This triggers the alert
             //page.getByRole('button', { name: 'Login' }).click()
         ]);
     });
